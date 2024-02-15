@@ -29,7 +29,13 @@ const postData = (req, res) => {
 };
 
 const updateData = (req, res) => {
-  const data = ["tony", "12345678", "hr", 6];
+  const data = [
+    req.body.name,
+    req.body.password,
+    req.body.user_type,
+    req.params.id,
+  ];
+  //   const data = ["tony", "12345678", "hr", 6];
   connection.query(
     "UPDATE users SET name=?,password=?,user_type=? WHERE id=?",
     data,
@@ -41,6 +47,14 @@ const updateData = (req, res) => {
 };
 
 const deleteData = (req, res) => {
+  //   console.log(req.params.id);
+  connection.query(
+    `DELETE FROM users WHERE id= ${req.params.id}`,
+    (error, results, fields) => {
+      if (error) throw error;
+      res.send(results.affectedRows);
+    }
+  );
   res.send("delete");
 };
 
