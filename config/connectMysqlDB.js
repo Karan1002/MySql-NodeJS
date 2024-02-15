@@ -15,4 +15,4 @@ try {
   console.log(error);
 }
 
-module.exports = { connection };
+module.exports = connection;
